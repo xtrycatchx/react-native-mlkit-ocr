@@ -1,9 +1,9 @@
 
 # react-native-ml-kit-ocr
 React Native wrapper for OCR functionality of https://developers.google.com/ml-kit/
-## <span style="color:red">Limitations</span>
--------
-<span style="color:red">Currently supports only Android</span>
+
+## Limitations
+As of the moment, this only supports Android. 
 
 ## Getting started
 
