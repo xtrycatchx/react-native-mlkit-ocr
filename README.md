@@ -39,7 +39,11 @@
 ```javascript
 import RNMlKitOcr from 'react-native-ml-kit-ocr';
 
-// TODO: What to do with the module?
-RNMlKitOcr;
+const pathOfImage = `the_path_of_your_image_to_extract`
+
+RNMlKitOcr.detect(pathOfImage).then(result => {
+	// do something with the data
+	console.log(JSON.parse(result))
+})
 ```
   
