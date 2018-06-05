@@ -3,7 +3,7 @@
 
 ## Getting started
 
-`$ npm install react-native-ml-kit-ocr --save`
+`$ npm install git+https://github.com/xtrycatchx/react-native-mlkit-ocr.git --save`
 
 ### Mostly automatic installation
 
