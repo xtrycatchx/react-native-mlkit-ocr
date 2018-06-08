@@ -4,6 +4,7 @@ package com.reactlibrary;
 import android.graphics.Point;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -13,10 +14,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,6 +35,7 @@ public class RNMlKitOcrModule extends ReactContextBaseJavaModule {
   public RNMlKitOcrModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
+
   }
 
   @Override
@@ -40,10 +45,20 @@ public class RNMlKitOcrModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void detect(String pathStr, final Promise promise) {
+      Log.i("SYDNEY", pathStr);
       try {
-          Uri path = Uri.parse(pathStr);
-          FirebaseVisionImage image = FirebaseVisionImage.fromFilePath(getCurrentActivity(), path);
+          Log.i("SYDNEY", "YO 2");
+          FirebaseApp.initializeApp(this.reactContext);
+          Log.i("SYDNEY", "YO 1");
+          boolean a = new File(pathStr).exists();
+          Log.i("SYDNEY", String.valueOf(a));
+          Uri path = Uri.fromFile(new File(pathStr));
+          Log.i("SYDNEY", "HERE");
+          Log.i("SYDNEY", path.getPath());
+          FirebaseVisionImage image = FirebaseVisionImage.fromFilePath(this.reactContext, path);
+          Log.i("SYDNEY", "HERE 1");
           FirebaseVisionTextDetector detector = FirebaseVision.getInstance().getVisionTextDetector();
+          Log.i("SYDNEY", "HERE 2");
           detector.detectInImage(image).addOnSuccessListener(
                   new OnSuccessListener<FirebaseVisionText>() {
                       @Override
@@ -63,6 +78,7 @@ public class RNMlKitOcrModule extends ReactContextBaseJavaModule {
                               }
                           });
       } catch (Exception e) {
+          Log.i("SYDNEY", "OOPS", e);
           promise.reject("Error ", e);
       }
   }
