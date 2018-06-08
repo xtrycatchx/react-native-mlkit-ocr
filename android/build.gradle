@@ -26,7 +26,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
-    //buildToolsVersion "23.0.1"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 16
@@ -55,12 +55,14 @@ allprojects {
 }
 
 dependencies {
+
     compile 'com.facebook.react:react-native:+'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
     compile 'com.fasterxml.jackson.core:jackson-core:2.8.5'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
-    implementation 'com.google.firebase:firebase-core:15.0.2'
-    implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
-}
 
-//apply plugin: 'com.google.gms.google-services'
+    compile 'com.google.firebase:firebase-core:16.0.0'
+    compile 'com.google.firebase:firebase-ml-vision:16.0.0'
+    compile 'com.google.firebase:firebase-ml-vision-image-label-model:15.0.0'
+    compile 'com.google.firebase:firebase-ml-model-interpreter:16.0.0'
+}
